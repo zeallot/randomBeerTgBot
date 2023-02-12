@@ -5,9 +5,11 @@ const {
   getMessagesCount,
   getCountOfUser,
 } = require("../statisticServices");
+require("dotenv").config();
 
-// TODO: change to telegramToken
-const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, { polling: true });
+const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {
+  polling: true,
+});
 
 const parseUser = (msg) => ({
   chat_id: msg.chat.id,
