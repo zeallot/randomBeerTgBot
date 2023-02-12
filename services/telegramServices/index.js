@@ -1,4 +1,3 @@
-const { telegramToken, ownerUsername } = require("../../config");
 const TelegramBot = require("node-telegram-bot-api");
 const { getRandomBeer, deleteBeerById } = require("../beerServices");
 const {
@@ -8,7 +7,7 @@ const {
 } = require("../statisticServices");
 
 // TODO: change to telegramToken
-const bot = new TelegramBot(telegramToken, { polling: true });
+const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, { polling: true });
 
 const parseUser = (msg) => ({
   chat_id: msg.chat.id,
@@ -62,7 +61,7 @@ const listenMessages = () => {
   bot.on("message", async (msg) => {
     const chatId = msg.chat.id;
     const user = parseUser(msg);
-    const isAdmin = user.username === ownerUsername;
+    const isAdmin = user.username === process.env.OWNER_USERNAME;
 
     await writeOrUpdateUser(user);
 

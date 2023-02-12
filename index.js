@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-const { mongoLink } = require("./config");
 const { listenMessages } = require("./services/telegramServices");
+require("dotenv").config();
 
 mongoose
-  .connect(mongoLink)
+  .connect(process.env.MONGO_LINK)
   .then(() => {
     console.log("connected");
     listenMessages();
